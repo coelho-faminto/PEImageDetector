@@ -69,5 +69,5 @@ package JScriptNETProgram {
     }
 }
 
-var cmdLine = Environment.GetCommandLineArgs();
+var cmdLine: System.String[] = Environment.GetCommandLineArgs();
 JScriptNETProgram.Program.Main(cmdLine.Length, cmdLine);
