@@ -1,19 +1,20 @@
 import System;
 import System.IO;
-// nice hack: change color syntax to ASP -> <%
+// nice hack for vscode: change color syntax to ASP -> <%
 
 package JScriptNETProgram {
     class Program {
         static function getNtOptionalHeaderMagic(arrBytes: Byte[]): Int16 {
             var int_offset_e_lfanew = 0x3C;
-            var arr_e_lfanew: Byte[] = [
-                arrBytes[int_offset_e_lfanew],
-                arrBytes[int_offset_e_lfanew + 1],
-                arrBytes[int_offset_e_lfanew + 2],
-                arrBytes[int_offset_e_lfanew + 3]
-            ];
-            
-            var e_lfanew: Int32 = BitConverter.ToInt32(arr_e_lfanew, 0);
+            var e_lfanew: Int32 = BitConverter.ToInt32(
+                [
+                    arrBytes[int_offset_e_lfanew],
+                    arrBytes[int_offset_e_lfanew + 1],
+                    arrBytes[int_offset_e_lfanew + 2],
+                    arrBytes[int_offset_e_lfanew + 3]
+                ],
+                0
+            );
 
             return BitConverter.ToInt16(
                 [
@@ -49,7 +50,7 @@ package JScriptNETProgram {
 
             Console.WriteLine('File has ' + arrBytes.Length + ' bytes.');
 
-            var wordMagic = getNtOptionalHeaderMagic(arrBytes);
+            var wordMagic: Int16 = getNtOptionalHeaderMagic(arrBytes);
                 
             Console.WriteLine("Magic: " + wordMagic.toString(16));
 
